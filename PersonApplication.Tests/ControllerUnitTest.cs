@@ -36,7 +36,7 @@ namespace PersonApplication.Tests {
                 var people = await pc.GetPeople();
                 Assert.Equal(people.Value, articles);
                 var person = await pc.GetPerson(10);
-                Assert.Equal(person.Value.Name, "testName2");
+                Assert.Equal("testName2", person.Value.Name);
                 Assert.Equal(person.Value.DateAdded, DateTime.MaxValue);
             }
         }
@@ -73,9 +73,9 @@ namespace PersonApplication.Tests {
                 await pc.DeletePerson(5);
                 var people = await pc.GetPeople();
                 var peopleArray = people.Value.ToArray();
-                Assert.Equal(peopleArray.Length, 1);
-                Assert.Equal(peopleArray[0].Name, "testName2");
-                Assert.Equal(peopleArray[0].Id, 10);
+                Assert.Single(peopleArray);
+                Assert.Equal("testName2", peopleArray[0].Name);
+                Assert.Equal(10, peopleArray[0].Id);
             }
         }
     }
